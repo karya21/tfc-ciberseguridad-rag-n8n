@@ -1,2 +1,4 @@
-# tfc-ciberseguridad-rag-n8n
-Proyecto de ciberseguridad basado en IA Generativa
+Asistente IA de Ciberseguridad 
+
+
+Proyecto TFC basado en IA Generativa con RAG y n8n
