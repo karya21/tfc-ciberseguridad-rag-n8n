@@ -1,0 +1,345 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Sube tu PDF ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Sube tu PDF",
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -384,
+        -352
+      ],
+      "id": "94702194-c95e-464d-a1d3-a8789d6a9f1b",
+      "name": "On form submission",
+      "webhookId": "e13257fe-7df0-43a8-b8bd-8866b20ed09c"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "Sube_tu_PDF",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        -352
+      ],
+      "id": "28689e26-7262-43d6-9556-82d2567f9ea2",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "70fdee5f-630b-43af-896d-035ca2e4736e",
+              "name": "",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        -336
+      ],
+      "id": "0a5e5606-a2eb-447d-a9b6-25c10fa2e988",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        -304
+      ],
+      "id": "a46bf15f-2f87-431c-ada9-243ec021205e",
+      "name": "Simple Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        -128
+      ],
+      "id": "89498e24-2019-4587-9d7d-f1beb8b9789a",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "U1IOFyXZrFb0cPQU",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        288,
+        -112
+      ],
+      "id": "ebdfdba3-0e76-4dad-87f3-70003d40dfc9",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -992,
+        0
+      ],
+      "id": "d83b7947-5697-41eb-b346-99bac3cbcbf5",
+      "name": "When chat message received",
+      "webhookId": "1919e161-4e8a-405b-afb1-3003da18e5ea"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Eres un asistente virtual especializado en ciberseguridad.\n\nTu función es analizar documentos cargados por el usuario y responder preguntas utilizando exclusivamente la información disponible en la base de conocimiento y en los documentos almacenados en el Vector Store.\n\nTus capacidades incluyen:\n\n* Analizar documentación técnica de ciberseguridad.\n* Identificar vulnerabilidades, riesgos y amenazas.\n* Responder preguntas relacionadas con auditorías de seguridad.\n* Explicar CVEs, vulnerabilidades y conceptos de seguridad.\n* Detectar posibles incumplimientos o malas prácticas descritas en la documentación.\n* Proponer medidas correctivas y recomendaciones de mejora.\n* Resumir documentos técnicos de forma clara y profesional.\n\nInstrucciones:\n\n* Utiliza siempre la información recuperada desde el Vector Store antes de responder.\n* Si la información no está disponible en los documentos, indícalo claramente.\n* No inventes datos ni generes información sin evidencia documental.\n* Utiliza un lenguaje profesional y técnico cuando sea necesario.\n* Cuando identifiques riesgos, explica su impacto potencial.\n* Cuando propongas mejoras, justifica brevemente la recomendación.\n* Estructura las respuestas de forma clara y ordenada.\n\nTu objetivo es ayudar en tareas de análisis documental, auditoría, gestión de riesgos y revisión de documentación relacionada con ciberseguridad.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -768,
+        0
+      ],
+      "id": "59157bea-5a84-4dc4-a4da-831c0ced2093",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -800,
+        176
+      ],
+      "id": "b1f9d693-7b4c-400c-979e-07870c121401",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "U1IOFyXZrFb0cPQU",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -608,
+        224
+      ],
+      "id": "832d6fb6-0cfb-4230-9a0f-11f606208ba0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Busca información en los PDF en la base vectorial",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        -496,
+        112
+      ],
+      "id": "68941b97-2f0a-4575-81ea-d1062cd0e280",
+      "name": "Simple Vector Store1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -448,
+        256
+      ],
+      "id": "1fd5d2c4-2f24-40c1-9d9d-5b63d19b5774",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "U1IOFyXZrFb0cPQU",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9cd4e72a-9b8f-4463-93df-8f3cf86b5015",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "49928a423f9016ab8c3a61eeac0535cc90ef2a36ebbfb273857e7ba911f7ca06"
+  },
+  "nodeGroups": [],
+  "id": "WCFarbN5Jw4nJ0sO",
+  "tags": []
+}
