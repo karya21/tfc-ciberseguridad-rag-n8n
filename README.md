@@ -1,1 +1,88 @@
-<h1>🛡️ Asistente IA de Ciberseguridad</h1> <p> Proyecto desarrollado utilizando automatización e inteligencia artificial para el análisis de documentación relacionada con ciberseguridad. </p> <hr> <h2>📌 Descripción del Proyecto</h2> <p> El sistema permite cargar documentos PDF y realizar preguntas relacionadas con su contenido utilizando inteligencia artificial. </p> <p> El objetivo principal es automatizar el análisis documental y facilitar la detección de posibles deficiencias de seguridad. </p> <hr> <h2>🎯 Objetivos</h2> <ul> <li>Automatizar tareas documentales</li> <li>Integrar IA en flujos de trabajo</li> <li>Aprender el uso de n8n</li> <li>Aplicar conceptos básicos de ciberseguridad</li> <li>Utilizar GitHub como herramienta profesional</li> </ul> <hr> <h2>⚙️ Tecnologías Utilizadas</h2> <ul> <li>n8n</li> <li>GitHub</li> <li>LLM / Inteligencia Artificial</li>  </ul> <hr> <h2>🔄 Funcionamiento del Sistema</h2> <h3>1. Carga del Documento</h3> <p> El usuario introduce un documento PDF dentro del flujo automatizado. </p> <h3>2. Extracción de Información</h3> <p> El sistema procesa automáticamente el contenido del documento. </p> <h3>3. Procesamiento mediante IA</h3> <p> La inteligencia artificial analiza el contenido y genera respuestas contextualizadas. </p> <h3>4. Respuesta Final</h3> <p> El usuario recibe información relacionada con vulnerabilidades, deficiencias de seguridad o recomendaciones técnicas. </p> <hr> <h2>🛡️ Ejemplo de Uso</h2> <p> Durante las pruebas se utilizó documentación relacionada con políticas de seguridad y análisis de vulnerabilidades. </p> <p> El sistema fue capaz de detectar: </p> <ul> <li>Ausencia de MFA</li> <li>Falta de auditorías</li> <li>Problemas de hardening</li> <li>Deficiencias en gestión de incidentes</li> </ul> <hr> <h2>⚠️ Limitaciones</h2> <ul> <li>Dependencia de la calidad del PDF</li> <li>Posibles respuestas incorrectas generadas por IA</li> <li>No existe validación automática de resultados</li> </ul> <hr> <h2>🚀 Mejoras Futuras</h2> <ul> <li>Integración con SIEM</li> <li>Dashboard visual</li> <li>Autenticación de usuarios</li> <li>Análisis automático de IOC</li> </ul> <hr> <h2>👩‍💻 Autora</h2> <p> Ana Rodríguez </p>
+# Asistente de Auditoría y Cumplimiento Normativo para MIDTECH
+
+## Descripción
+
+Este proyecto consiste en el desarrollo de un asistente inteligente basado en IA Generativa y RAG (Retrieval-Augmented Generation) para apoyar tareas de auditoría, cumplimiento normativo y análisis documental.
+
+El sistema permite cargar documentación corporativa y normativa, almacenarla en una base vectorial y realizar consultas en lenguaje natural para identificar requisitos, incumplimientos, brechas de seguridad y acciones de mejora.
+
+---
+
+## Objetivos
+
+- Analizar documentación normativa y corporativa.
+- Responder preguntas de auditoría.
+- Identificar incumplimientos y brechas de cumplimiento.
+- Facilitar el acceso a la información documental.
+- Generar respuestas contextualizadas basadas únicamente en la documentación cargada.
+
+---
+
+## Tecnologías utilizadas
+
+- n8n
+- OpenAI
+- Embeddings OpenAI (text-embedding-3-small)
+- Vector Store
+- Retrieval-Augmented Generation (RAG)
+- GitHub
+
+---
+
+## Arquitectura del sistema
+
+1. El usuario carga documentos PDF.
+2. El sistema extrae el contenido textual.
+3. Se generan embeddings mediante OpenAI.
+4. La información se almacena en una base vectorial.
+5. El asistente recupera los fragmentos relevantes.
+6. Se genera una respuesta contextualizada utilizando IA.
+
+---
+
+## Documentación utilizada
+
+La base de conocimiento está compuesta por:
+
+- ISO 27001
+- GDPR / RGPD
+- ENS
+- Política de Seguridad de MIDTECH (PSI-MIDTECH)
+
+---
+
+## Capacidades implementadas
+
+### Análisis documental
+
+Permite consultar información contenida en la documentación cargada.
+
+### Preguntas de auditoría
+
+Responde consultas relacionadas con cumplimiento normativo y seguridad.
+
+### Gap Analysis
+
+Identifica brechas e incumplimientos respecto a los requisitos normativos.
+
+### Propuestas de mejora
+
+Genera recomendaciones basadas en la documentación analizada.
+
+---
+
+## Ejemplos de consultas
+
+- ¿Qué limitaciones relacionadas con GDPR identifica MIDTECH?
+- ¿Qué controles de ISO 27001 cumple MIDTECH?
+- ¿Qué establece MIDTECH respecto a las contraseñas?
+- ¿Cómo gestiona MIDTECH los incidentes de seguridad?
+
+---
+
+## Evidencias
+
+Las capturas de pantalla y evidencias de funcionamiento se encuentran en la carpeta:
+
+```text
+ScreenShoot/flujo-n8n/
